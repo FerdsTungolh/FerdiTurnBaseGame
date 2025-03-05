@@ -1,0 +1,252 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Media;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace FerdiTurnBaseGame
+{
+    public partial class Map : Form
+    {
+        public int choosenplayer;
+        List<string> playerMov = new List<string>();
+        int steps;
+        int SlowdownFps = 0;
+        bool goLeft, goRight, goUp, goDown;
+        int speed = 20;
+        String LastPosition = "Right";
+        public Map()
+        {
+            InitializeComponent();
+        }
+
+
+
+        private void Collision()
+        {
+
+            if (pictureBox1.Bounds.IntersectsWith(pictureBox2.Bounds))
+            {
+                Form1 form = new Form1();
+                form.Show();
+                this.Hide();
+            }
+        }
+        private void BackgroundFx()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\tungo\source\repos\FerdiTurnBaseGame\FerdiTurnBaseGame\assets\Naruto - Main theme (Flute cover).wav");
+            simpleSound.PlayLooping();
+        }
+
+        private void Map_KeyDown_1(object sender, KeyEventArgs e)
+        {
+           switch (e.KeyCode)
+            {
+                case Keys.Left:
+                case Keys.A:
+                    pictureBox1.Left -= speed;
+                    goLeft = true;
+                    break;
+                case Keys.Right:
+                case Keys.D:
+                    pictureBox1.Left += speed;
+                    goRight = true;
+                    break;
+                case Keys.Up:
+                case Keys.W:
+                    pictureBox1.Top -= speed;
+                    goUp = true;
+                    break;
+                case Keys.Down:
+                case Keys.S:
+                    pictureBox1.Top += speed;
+                    goDown = true;
+                    break;
+            }
+            
+            /* if (e.KeyCode == Keys.A)
+            {
+                pictureBox1.Left -= speed;
+                goLeft = true;
+            }
+            if (e.KeyCode == Keys.D)
+            {
+                pictureBox1.Left += speed;
+                goRight = true;
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                pictureBox1.Top -= speed;
+                goUp = true;
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                pictureBox1.Top += speed;
+                goDown = true;
+            }
+           */
+            Collision();
+
+
+        }
+    
+        private void Map_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A)
+            {
+                goLeft = false;
+                pictureBox1.Image = Image.FromFile(playerMov[7]);
+                LastPosition = "Left";
+            }
+            if (e.KeyCode == Keys.D)
+            {
+                goRight = false;
+                pictureBox1.Image = Image.FromFile(playerMov[0]);
+                LastPosition = "Right";
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                goUp = false;
+                if (LastPosition == "Right")
+                {
+                    pictureBox1.Image = Image.FromFile(playerMov[0]);
+                }
+                else if (LastPosition == "Left")
+                {
+                    pictureBox1.Image = Image.FromFile(playerMov[7]);
+                }
+
+
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                goDown = false;
+
+                if (LastPosition == "Right")
+                {
+                    pictureBox1.Image = Image.FromFile(playerMov[0]);
+                }
+                else if (LastPosition == "Left")
+                {
+                    pictureBox1.Image = Image.FromFile(playerMov[7]);
+                }
+            }
+
+        }
+
+  
+        private void TimeEvent(object sender, EventArgs e)
+        {
+            if (goUp == true && LastPosition == "Left")
+            {
+                AnimatedPlayer(8, 13);
+            }
+            if (goUp == true && LastPosition == "Right")
+            {
+                AnimatedPlayer(1, 6);
+            }
+            if (goDown == true && LastPosition == "Left")
+            {
+                AnimatedPlayer(8, 13);
+            }
+            if (goDown == true && LastPosition == "Right")
+            {
+                AnimatedPlayer(1, 6);
+            }
+            if (goRight == true)
+            {
+                AnimatedPlayer(1, 6);
+            }
+            if (goLeft == true)
+            {
+                AnimatedPlayer(8, 13);
+            }
+
+            this.Invalidate();
+
+
+        }
+        private void Setup(int choosen)
+        {
+
+            if (choosen == 1)
+            {
+                playerMov = Directory.GetFiles("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Sasuke_Movement\\", "*.png").ToList();
+                pictureBox1.Image = Image.FromFile(playerMov[0]);
+                pictureBox2.Image = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Naruto_Movement\\Naruto_Mov_07.png");
+            }
+            if (choosen == 0)
+            {
+                playerMov = Directory.GetFiles("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Naruto_Movement\\", "*.png").ToList();
+                pictureBox1.Image = Image.FromFile(playerMov[0]);
+                pictureBox2.Image = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Sasuke_Movement\\Sasuke_Mov_07.png");
+            }
+            this.BackgroundImage = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Map.jfif");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.DoubleBuffered = true;
+            BackgroundFx();
+            timer1.Enabled = true;
+        }
+
+        private void AnimatedPlayer(int start, int end)
+        {
+            SlowdownFps += 1;
+            if (SlowdownFps == 5)
+            {
+                steps++;
+                SlowdownFps = 0;
+            }
+
+            if (steps > end || steps < start)
+            {
+                steps = start;
+            }
+
+            pictureBox1.Image = Image.FromFile(playerMov[steps]);
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
+
+            pictureBox3.Image = Image.FromFile($"{stats.Entity()[comboBox1.SelectedIndex].PlayerImageRight}");
+            listBox1.Items.Clear();
+            listBox1.Items.Add($"Character Name {stats.Entity()[comboBox1.SelectedIndex].Name}");
+            listBox1.Items.Add($"Health : {stats.Entity()[comboBox1.SelectedIndex].Hp}");
+            listBox1.Items.Add($"Defense : {stats.Entity()[comboBox1.SelectedIndex].Defense}");
+            listBox1.Items.Add($"Critical Chance : {stats.Entity()[comboBox1.SelectedIndex].Crit}");
+            listBox1.Items.Add($"Mana : {stats.Entity()[comboBox1.SelectedIndex].Mana}");
+            listBox1.Items.Add($"Mana Regeneration : {stats.Entity()[comboBox1.SelectedIndex].Manaregenrate}");
+        }
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panel1.Hide();
+            Setup(comboBox1.SelectedIndex);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void panel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Map_Load(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("Naruto");
+            comboBox1.Items.Add("Sasuke");
+        }
+    }
+}

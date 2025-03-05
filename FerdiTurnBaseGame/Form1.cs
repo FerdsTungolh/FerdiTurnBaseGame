@@ -1,0 +1,261 @@
+using System.Media;
+using System.Numerics;
+using System.Windows.Forms;
+
+namespace FerdiTurnBaseGame
+{
+    public partial class Form1 : Form
+    {
+        public Player Player1;
+        public Player Player2;
+        private Player currentPlayer;
+        private Player opponent;
+        private string nameofskill;
+        private string typeofskill;
+        public int PreviousMp;
+        public int DamageTaken;
+
+        public Form1()
+        {
+            InitializeComponent();
+            InitializeGame();
+            BackgroundFx();
+        }
+
+        private void InitializeGame()
+        {
+            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
+            Player_and_Enemies_Stats FirstPlayer = stats.Entity()[0];
+            Player_and_Enemies_Stats SecondPlayer = stats.Entity()[1];
+            
+            
+            pictureBox1.Image = Image.FromFile(FirstPlayer.PlayerImageRight);
+            pictureBox2.Image = Image.FromFile(SecondPlayer.PlayerImageLeft);
+
+            Player1 = new Player(FirstPlayer.Name, FirstPlayer.Hp, FirstPlayer.Defense, FirstPlayer.Crit, FirstPlayer.Mana, FirstPlayer.Manaregenrate);
+            Player2 = new Player(SecondPlayer.Name, SecondPlayer.Hp, SecondPlayer.Defense, SecondPlayer.Crit, SecondPlayer.Mana, SecondPlayer.Manaregenrate);
+
+            for (int sk = 0; sk < stats.EntitySkills().Count; sk++)
+            {
+                Player_and_Enemies_Stats PlayerSkills = stats.EntitySkills()[sk];
+                if (PlayerSkills.SkillEntity == FirstPlayer.Name)
+                {
+                    Player1.Addskill(new Skill(PlayerSkills.SkillName, PlayerSkills.SkillDamage, PlayerSkills.SkillAccuracy, PlayerSkills.SkillCost, PlayerSkills.SkillHeal, PlayerSkills.SkillType));
+                }
+                if (PlayerSkills.SkillEntity == SecondPlayer.Name)
+                {
+                    Player2.Addskill(new Skill(PlayerSkills.SkillName, PlayerSkills.SkillDamage, PlayerSkills.SkillAccuracy, PlayerSkills.SkillCost, PlayerSkills.SkillHeal, PlayerSkills.SkillType));
+                }
+            }
+            currentPlayer = Player1;
+            opponent = Player2;
+            UpdateUI();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Player 1 Skills Description for comboBox selection Automatic 
+            for (int i = 0; i < Player1.Skills.Count; i++)
+            {
+                comboBox1.Items.Add($"{Player1.Skills[i].Name}");
+            }
+            comboBox1.SelectedIndex = 0;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Players Skill Initialization to Attack and Conditions
+            //Checking if player have skills
+
+            if (currentPlayer.Skills.Count == 0)
+            {
+                MessageBox.Show($"{currentPlayer.Name} has no skill");
+            }
+            //Variable for Damage Calculation
+            int PreviousHp = opponent.Hp;
+            int previoushp = currentPlayer.Hp;
+            //Player 1 Skills Conditions and selections
+            if (currentPlayer == Player1)
+            {
+                if (currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost <= currentPlayer.Mana)
+                {
+                    currentPlayer.Useskill(currentPlayer.Skills[comboBox1.SelectedIndex], opponent, currentPlayer);
+                    typeofskill = currentPlayer.Skills[comboBox1.SelectedIndex].SkillType;
+                    nameofskill = currentPlayer.Skills[comboBox1.SelectedIndex].Name;
+                    currentPlayer.Mana -= currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost;
+
+                }
+                else if (currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost > currentPlayer.Mana)
+                {
+                    MessageBox.Show($"{currentPlayer.Name} doesn't have enough chakra");
+                    return;
+                }
+            }
+            //Player 2 Skills Conditions and selections Auto skill selection
+            else if (currentPlayer == Player2)
+            {
+
+                Random ranskill = new Random();
+                while (true)
+                {
+                inloop:
+                    int p2skill = ranskill.Next(currentPlayer.Skills.Count);
+                    if (currentPlayer.Skills[4].ManaCost <= currentPlayer.Mana && currentPlayer.Hp <= 30)
+                    {
+                        currentPlayer.Useskill(currentPlayer.Skills[4], opponent, currentPlayer);
+                        typeofskill = currentPlayer.Skills[4].SkillType;
+                        nameofskill = currentPlayer.Skills[4].Name;
+                        currentPlayer.Mana -= currentPlayer.Skills[4].ManaCost;
+                        goto outloop;
+                    }
+                    else if (currentPlayer.Skills[p2skill].ManaCost <= currentPlayer.Mana)
+                    {
+                        currentPlayer.Useskill(currentPlayer.Skills[p2skill], opponent, currentPlayer);
+                        typeofskill = currentPlayer.Skills[p2skill].SkillType;
+                        nameofskill = currentPlayer.Skills[p2skill].Name;
+                        currentPlayer.Mana -= currentPlayer.Skills[p2skill].ManaCost;
+                        goto outloop;
+                    }
+                    else if (currentPlayer.Skills[p2skill].ManaCost > currentPlayer.Mana)
+                    {
+                        goto inloop;
+                    }
+                }
+
+            }
+        outloop:
+            // Damage Calculations
+            DamageTaken = PreviousHp - opponent.Hp;
+            // UI for health update
+            UpdateUI();
+            // Indicators of skills which skill hit and player damage
+
+            //Attack Miss & Healed indicator
+
+            if (typeofskill == "Heal")
+            {
+                label6.ForeColor = Color.SeaGreen;
+                label6.Text = $"{currentPlayer.Name} use {nameofskill} and healed {currentPlayer.Hp - previoushp} HP";
+            }
+            else if (currentPlayer.isLanded == false)
+            {
+                label6.ForeColor = Color.Red;
+                label6.Text = $"{currentPlayer.Name} has missed the {nameofskill}";
+            }
+            //Attack Landed
+            else if (currentPlayer.isLanded == true && typeofskill == "Attack" || typeofskill == "Lifesteal")
+            {
+                label6.ForeColor = Color.Green;
+                // Attack Crited
+                if (currentPlayer.isCrited == true)
+                {
+                    if (typeofskill == "Lifesteal")
+                    {
+                        label6.Text = $"{currentPlayer.Name} uses {nameofskill}\n {opponent.Name} had taken {DamageTaken} critical damage\n{currentPlayer.Name} is healed {currentPlayer.Hp - previoushp} HP";
+                    }
+                    else
+                    {
+                        label6.Text = $"{currentPlayer.Name} uses {nameofskill}\n {opponent.Name} had taken {DamageTaken} critical damage";
+                    }
+                }
+                //Attack Does not Crited
+                else if (currentPlayer.isCrited == false)
+                {
+                    if (typeofskill == "Lifesteal")
+                    {
+                        label6.Text = $"{currentPlayer.Name} uses {nameofskill}\n{opponent.Name} has  taken {DamageTaken} damage\n{currentPlayer.Name} is healed {currentPlayer.Hp - previoushp} HP";
+                    }
+                    else
+                    {
+                        label6.Text = $"{currentPlayer.Name} uses {nameofskill}\n {opponent.Name} has  taken {DamageTaken} damage";
+                    }
+                }
+            }
+            // Checking who win and reseting the game
+            if (opponent.Hp == 0)
+            {
+                MessageBox.Show($"{currentPlayer.Name} Win!", "Game Over");
+                label6.Text = $"";
+                InitializeGame();
+                return;
+            }
+            // Swaping for turn
+            SwapTurn();
+
+        }
+        private void SwapTurn()
+        {
+
+            opponent.Manaregen(opponent);
+            Player temp = currentPlayer;
+            currentPlayer = opponent;
+            opponent = temp;
+            label3.Text = $"{currentPlayer.Name}'s Turn";
+        }
+        private void UpdateUI()
+        {
+            label1.Text = Player1.Name + ": " + Player1.Hp + "HP";
+            label2.Text = $"{Player2.Name}: {Player2.Hp} HP";
+            chp1.Text = $"Chakra : {Player1.Mana}";
+            chp2.Text = $"Chakra : {Player2.Mana}";
+            progressBar1.Value = Player1.Hp;
+            progressBar2.Value = Player2.Hp;
+            progressBar3.Value = Player1.Mana;
+            progressBar4.Value = Player2.Mana;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            InitializeGame();
+            BackgroundFx();
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (currentPlayer == Player1)
+            {
+                listBox1.Items.Clear();
+
+                listBox1.Items.Add($" Skill Name [{currentPlayer.Skills[comboBox1.SelectedIndex].Name}] Skill Type [{currentPlayer.Skills[comboBox1.SelectedIndex].SkillType}]");
+                if (currentPlayer.Skills[comboBox1.SelectedIndex].SkillType == "Attack")
+                {
+                    listBox1.Items.Add($"Damage: {currentPlayer.Skills[comboBox1.SelectedIndex].Damage} | CharkaCost: {currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy: {currentPlayer.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+                else if (currentPlayer.Skills[comboBox1.SelectedIndex].SkillType == "Lifesteal")
+                {
+                    listBox1.Items.Add($"Damage: {currentPlayer.Skills[comboBox1.SelectedIndex].Damage} | Heal: {currentPlayer.Skills[comboBox1.SelectedIndex].Healing} | ChakraCost: {currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy {currentPlayer.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+                else if (currentPlayer.Skills[comboBox1.SelectedIndex].SkillType == "Heal")
+                {
+                    listBox1.Items.Add($"Heal: {currentPlayer.Skills[comboBox1.SelectedIndex].Healing} | ChakraCost: {currentPlayer.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy: {currentPlayer.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+            }
+            if (currentPlayer == Player2)
+            {
+                listBox1.Items.Clear();
+
+                listBox1.Items.Add($" Skill Name [{opponent.Skills[comboBox1.SelectedIndex].Name}] Skill Type [{opponent.Skills[comboBox1.SelectedIndex].SkillType}]");
+                if (opponent.Skills[comboBox1.SelectedIndex].SkillType == "Attack")
+                {
+                    listBox1.Items.Add($"Damage: {opponent.Skills[comboBox1.SelectedIndex].Damage} | CharkaCost: {opponent.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy: {opponent.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+                else if (opponent.Skills[comboBox1.SelectedIndex].SkillType == "Lifesteal")
+                {
+                    listBox1.Items.Add($"Damage: {opponent.Skills[comboBox1.SelectedIndex].Damage} | Heal: {opponent.Skills[comboBox1.SelectedIndex].Healing} | ChakraCost: {opponent.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy {opponent.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+                else if (opponent.Skills[comboBox1.SelectedIndex].SkillType == "Heal")
+                {
+                    listBox1.Items.Add($"Heal: {opponent.Skills[comboBox1.SelectedIndex].Healing} | ChakraCost: {opponent.Skills[comboBox1.SelectedIndex].ManaCost} | Accuracy: {opponent.Skills[comboBox1.SelectedIndex].Accuracy}");
+                }
+            }
+        }
+        private void BackgroundFx()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\tungo\Source\Repos\FerdiProj1\FerdiProj1\Resources\Naruto Theme Song - Bad Flute Cover.wav");
+            simpleSound.PlayLooping();
+        }
+
+        private void ComboBox1_SizeChanged(object? sender, EventArgs e)
+        {
+
+        }
+    }
+}
