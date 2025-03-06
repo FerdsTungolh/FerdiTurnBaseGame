@@ -25,7 +25,7 @@ namespace FerdiTurnBaseGame
         private void InitializeGame()
         {
             Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
-            Player_and_Enemies_Stats FirstPlayer = stats.Entity()[0];
+            Player_and_Enemies_Stats FirstPlayer = stats.Entity()[stats.Selectedplayer];
             Player_and_Enemies_Stats SecondPlayer = stats.Entity()[1];
             
             
@@ -249,7 +249,7 @@ namespace FerdiTurnBaseGame
         }
         private void BackgroundFx()
         {
-            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\tungo\Source\Repos\FerdiProj1\FerdiProj1\Resources\Naruto Theme Song - Bad Flute Cover.wav");
+            SoundPlayer simpleSound = new SoundPlayer(@"assets\Naruto Theme Song - Bad Flute Cover.wav");
             simpleSound.PlayLooping();
         }
 

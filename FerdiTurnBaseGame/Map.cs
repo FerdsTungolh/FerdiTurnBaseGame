@@ -14,7 +14,7 @@ namespace FerdiTurnBaseGame
 {
     public partial class Map : Form
     {
-        public int choosenplayer;
+        public int choosenplayer { get; set; }
         List<string> playerMov = new List<string>();
         int steps;
         int SlowdownFps = 0;
@@ -40,7 +40,7 @@ namespace FerdiTurnBaseGame
         }
         private void BackgroundFx()
         {
-            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\tungo\source\repos\FerdiTurnBaseGame\FerdiTurnBaseGame\assets\Naruto - Main theme (Flute cover).wav");
+            SoundPlayer simpleSound = new SoundPlayer(@"assets\Naruto - Main theme (Flute cover).wav");
             simpleSound.PlayLooping();
         }
 
@@ -177,17 +177,17 @@ namespace FerdiTurnBaseGame
 
             if (choosen == 1)
             {
-                playerMov = Directory.GetFiles("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Sasuke_Movement\\", "*.png").ToList();
+                playerMov = Directory.GetFiles("assets\\Sasuke_Movement\\", "*.png").ToList();
                 pictureBox1.Image = Image.FromFile(playerMov[0]);
-                pictureBox2.Image = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Naruto_Movement\\Naruto_Mov_07.png");
+                pictureBox2.Image = Image.FromFile("assets\\Naruto_Movement\\Naruto_Mov_07.png");
             }
             if (choosen == 0)
             {
-                playerMov = Directory.GetFiles("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Naruto_Movement\\", "*.png").ToList();
+                playerMov = Directory.GetFiles("assets\\Naruto_Movement\\", "*.png").ToList();
                 pictureBox1.Image = Image.FromFile(playerMov[0]);
-                pictureBox2.Image = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Sasuke_Movement\\Sasuke_Mov_07.png");
+                pictureBox2.Image = Image.FromFile("assets\\Sasuke_Movement\\Sasuke_Mov_07.png");
             }
-            this.BackgroundImage = Image.FromFile("C:\\Users\\tungo\\source\\repos\\FerdiTurnBaseGame\\FerdiTurnBaseGame\\assets\\Map.jfif");
+            this.BackgroundImage = Image.FromFile("assets\\Map.jfif");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.DoubleBuffered = true;
             BackgroundFx();
@@ -229,7 +229,12 @@ namespace FerdiTurnBaseGame
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Player_and_Enemies_Stats choosen = new Player_and_Enemies_Stats(comboBox1.SelectedIndex);
+            choosen.Selectedplayer = comboBox1.SelectedIndex;
+            panel1.Enabled = false;
             panel1.Hide();
+            comboBox1.Enabled = false;
+            button1.Enabled = false;
             Setup(comboBox1.SelectedIndex);
         }
 

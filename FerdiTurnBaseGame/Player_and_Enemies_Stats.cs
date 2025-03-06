@@ -24,6 +24,7 @@ namespace FerdiTurnBaseGame
         public string PlayerImageRight { get; set; }
         public string PlayerImageLeft { get; set; }
         public string EntityName { get; set; }
+        public int Selectedplayer { get; set; }
         
         public Player_and_Enemies_Stats(string name, int hp, int defense, int crit, int mana, int manaregenrate, string playerimageright, string playerimageleft)
         {
@@ -36,6 +37,7 @@ namespace FerdiTurnBaseGame
             PlayerImageRight = playerimageright;
             PlayerImageLeft = playerimageleft;
 
+
         }
         public Player_and_Enemies_Stats(string skillname, int skilldamage, int skillaccuracy, int skillcost, int skillheal, string skilltype, string skillentity)
         {
@@ -47,6 +49,10 @@ namespace FerdiTurnBaseGame
             SkillType = skilltype;
             SkillEntity = skillentity;
         }
+        public Player_and_Enemies_Stats(int selectedplayer)
+        {
+            Selectedplayer = selectedplayer;
+        }
         public Player_and_Enemies_Stats()
         {
             
@@ -56,8 +62,8 @@ namespace FerdiTurnBaseGame
         {
             List<Player_and_Enemies_Stats> EntityStats = new List<Player_and_Enemies_Stats>();
             //Player Health and Stats (Name, Hp, Defense, Critrate, Mana, Mana regen)
-            EntityStats.Add(new Player_and_Enemies_Stats("Naruto", 100, 10, 50, 100, 5, "C:\\Users\\tungo\\Source\\Repos\\FerdiProj1\\FerdiProj1\\Resources\\Naruto_Movement\\Naruto_Mov_00.png", "C:\\Users\\tungo\\Source\\Repos\\FerdiProj1\\FerdiProj1\\Resources\\Naruto_Movement\\Naruto_Mov_07.png"));
-            EntityStats.Add(new Player_and_Enemies_Stats("Sasuke", 100, 5, 50, 100, 5, "C:\\Users\\tungo\\Source\\Repos\\FerdiProj1\\FerdiProj1\\Resources\\SasukeRight.png", "C:\\Users\\tungo\\Source\\Repos\\FerdiProj1\\FerdiProj1\\Resources\\SasukeLeft.png"));
+            EntityStats.Add(new Player_and_Enemies_Stats("Naruto", 100, 10, 50, 100, 5, "assets\\Naruto_Movement\\Naruto_Mov_00.png", "assets\\Naruto_Movement\\Naruto_Mov_07.png"));
+            EntityStats.Add(new Player_and_Enemies_Stats("Sasuke", 100, 5, 50, 100, 5, "assets\\Sasuke_Movement\\Sasuke_Mov_00.png", "assets\\Sasuke_Movement\\Sasuke_Mov_07.png"));
 
             return EntityStats;
         }
