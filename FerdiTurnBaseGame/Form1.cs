@@ -93,7 +93,6 @@ namespace FerdiTurnBaseGame
             //Player 2 Skills Conditions and selections Auto skill selection
             else if (currentPlayer == Player2)
             {
-
                 Random ranskill = new Random();
                 while (true)
                 {

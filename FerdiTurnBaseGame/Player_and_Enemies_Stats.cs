@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FerdiTurnBaseGame
 {
-    public class Player_and_Enemies_Stats
+    public class Player_and_Enemies_Stats : Player_Skills_Stats
     {
         public string Name { get; set; }
         public int Hp { get; set; }
@@ -14,13 +14,6 @@ namespace FerdiTurnBaseGame
         public int Defense { get; set; }
         public int Mana { get; set; }
         public int Manaregenrate { get; set; }
-        public string SkillName { get; set; }
-        public int SkillDamage { get; set; }
-        public int SkillAccuracy { get; set; }
-        public int SkillCost { get; set; }
-        public int SkillHeal { get; set; }
-        public string SkillType { get; set; }
-        public string SkillEntity { get; set; }
         public string PlayerImageRight { get; set; }
         public string PlayerImageLeft { get; set; }
         public string EntityName { get; set; }
@@ -51,7 +44,7 @@ namespace FerdiTurnBaseGame
         }
         public Player_and_Enemies_Stats(int selectedplayer)
         {
-            Selectedplayer = selectedplayer;
+            this.Selectedplayer = selectedplayer;
         }
         public Player_and_Enemies_Stats()
         {
@@ -75,17 +68,21 @@ namespace FerdiTurnBaseGame
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Shuriken", 15, 80, 10, 0, "Attack", Entity()[0].Name));
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Rasengan", 40, 50, 50, 0, "Attack", Entity()[0].Name));
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Rasen Shuriken", 25, 50, 20, 10, "Lifesteal", Entity()[0].Name));
-            EntitySkillStats.Add(new Player_and_Enemies_Stats("Healing Jutsu", 20, 100, 25, 20, "Heal", Entity()[0].Name));
+            EntitySkillStats.Add(new Player_and_Enemies_Stats("Healing Jutsu", 0, 100, 25, 20, "Heal", Entity()[0].Name));
             //Sasuke Skills
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Basic Attack", 9, 95, 0, 0, "Attack", Entity()[1].Name));
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Chidori", 20, 80, 10, 0, "Attack", Entity()[1].Name));
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Raikiri", 25, 50, 20, 0, "Attack", Entity()[1].Name));
             EntitySkillStats.Add(new Player_and_Enemies_Stats("Amaterasu", 45, 30, 50, 0, "Attack", Entity()[1].Name));
-            EntitySkillStats.Add(new Player_and_Enemies_Stats("Healing Jutsu", 20, 100, 25, 20, "Heal", Entity()[1].Name));
+            EntitySkillStats.Add(new Player_and_Enemies_Stats("Healing Jutsu", 0, 100, 25, 20, "Heal", Entity()[1].Name));
             return EntitySkillStats;
         }
+        public int PlayerSelected(int player)
+        {
+            this.Selectedplayer = player;
+            return Selectedplayer;
+        }
 
-       
 
     }
 }
