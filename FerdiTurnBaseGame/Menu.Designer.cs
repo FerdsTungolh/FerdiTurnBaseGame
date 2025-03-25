@@ -1,6 +1,6 @@
 ﻿namespace FerdiTurnBaseGame
 {
-    partial class PlayerMenu_Selection
+    partial class Menu
     {
         /// <summary>
         /// Required designer variable.
@@ -33,16 +33,18 @@
             listBox1 = new ListBox();
             listBox2 = new ListBox();
             pictureBox1 = new PictureBox();
+            textBox1 = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(184, 392);
+            button1.Location = new Point(179, 391);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
-            button1.Text = "button1";
+            button1.Text = "Select";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -81,21 +83,40 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
-            // PlayerMenu_Selection
+            // textBox1
+            // 
+            textBox1.Location = new Point(154, 493);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(167, 475);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Player Name";
+            // 
+            // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(703, 563);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
             Controls.Add(pictureBox1);
             Controls.Add(listBox2);
             Controls.Add(listBox1);
             Controls.Add(comboBox1);
             Controls.Add(button1);
-            Name = "PlayerMenu_Selection";
+            Name = "Menu";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "PlayerMenu_Selection";
+            Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -105,5 +126,7 @@
         private ListBox listBox1;
         private ListBox listBox2;
         private PictureBox pictureBox1;
+        private TextBox textBox1;
+        private Label label1;
     }
 }

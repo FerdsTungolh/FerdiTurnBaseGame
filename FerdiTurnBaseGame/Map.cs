@@ -23,8 +23,9 @@ namespace FerdiTurnBaseGame
         String LastPosition = "Right";
         public Map()
         {
-            Player_and_Enemies_Stats player = new Player_and_Enemies_Stats();
+            Stats player = new Stats();
             InitializeComponent();
+            Setup();
         }
 
 
@@ -150,13 +151,18 @@ namespace FerdiTurnBaseGame
         }
         private void Setup()
         {
-            if (comboBox1.SelectedIndex == 1)
+            Stats player = new Stats();
+            int Selected;
+            
+                Selected = SelecyPoly.selected.GetPlayer()[0].choosedplayer;
+
+            if ( Selected == 1)
             {
                 playerMov = Directory.GetFiles("assets\\Sasuke_Movement\\", "*.png").ToList();
                 pictureBox1.Image = Image.FromFile(playerMov[0]);
                 pictureBox2.Image = Image.FromFile("assets\\Naruto_Movement\\Naruto_Mov_07.png");
             }
-            else if (comboBox1.SelectedIndex == 0)
+            else if ( Selected == 0)
             {
                 playerMov = Directory.GetFiles("assets\\Naruto_Movement\\", "*.png").ToList();
                 pictureBox1.Image = Image.FromFile(playerMov[0]);
@@ -165,7 +171,7 @@ namespace FerdiTurnBaseGame
             this.BackgroundImage = Image.FromFile("assets\\Map.jfif");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.DoubleBuffered = true;
-            BackgroundFx();
+            //BackgroundFx();
             timer1.Enabled = true;
         }
 
@@ -188,11 +194,11 @@ namespace FerdiTurnBaseGame
         }
         private void Map_Load(object sender, EventArgs e)
         {
-            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
-            Player_and_Enemies_Stats Player1 = stats.Entity()[0];
-            Player_and_Enemies_Stats Player2 = stats.Entity()[1];
-            string[] playernames = { Player1.Name, Player2.Name };
-            comboBox1.Items.AddRange(playernames);
+            //Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
+            //Player_and_Enemies_Stats Player1 = stats.Entity()[0];
+            //Player_and_Enemies_Stats Player2 = stats.Entity()[1];
+            //string[] playernames = { Player1.Name, Player2.Name };
+            //comboBox1.Items.AddRange(playernames);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -202,37 +208,37 @@ namespace FerdiTurnBaseGame
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Player_and_Enemies_Stats player = new Player_and_Enemies_Stats();
-            player.Selectedplayer = 1;
-            listBox1.Items.Clear();
-            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
-            pictureBox3.Image = Image.FromFile($"{stats.Entity()[comboBox1.SelectedIndex].PlayerImageRight}");
-            listBox1.Items.Add($"Name : {stats.Entity()[comboBox1.SelectedIndex].Name}");
-            listBox1.Items.Add($"HP : {stats.Entity()[comboBox1.SelectedIndex].Hp}");
-            listBox1.Items.Add($"Defense : {stats.Entity()[comboBox1.SelectedIndex].Defense}");
-            listBox1.Items.Add($"Crit Chance : {stats.Entity()[comboBox1.SelectedIndex].Crit}");
-            listBox1.Items.Add($"Mana Regen : {stats.Entity()[comboBox1.SelectedIndex].Manaregenrate}");
-            listBox2.Items.Clear();
-            listBox2.Items.Add($"Skills");
-            listBox2.Items.Add($"Name|Damage|Manacost|Acccuracy|Heal");
-            foreach (var item in stats.EntitySkills())
-            {
-                if (item.SkillEntity == stats.Entity()[comboBox1.SelectedIndex].Name)
-                {
-                    listBox2.Items.Add($"{item.SkillName} | {item.SkillDamage} | {item.SkillCost} | {item.SkillAccuracy} | {item.SkillHeal}");
-                }
-            }
+            //Player_and_Enemies_Stats player = new Player_and_Enemies_Stats();
+            //player.Selectedplayer = 1;
+            //listBox1.Items.Clear();
+            //Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
+            //pictureBox3.Image = Image.FromFile($"{stats.Entity()[comboBox1.SelectedIndex].PlayerImageRight}");
+            //listBox1.Items.Add($"Name : {stats.Entity()[comboBox1.SelectedIndex].Name}");
+            //listBox1.Items.Add($"HP : {stats.Entity()[comboBox1.SelectedIndex].Hp}");
+            //listBox1.Items.Add($"Defense : {stats.Entity()[comboBox1.SelectedIndex].Defense}");
+            //listBox1.Items.Add($"Crit Chance : {stats.Entity()[comboBox1.SelectedIndex].Crit}");
+            //listBox1.Items.Add($"Mana Regen : {stats.Entity()[comboBox1.SelectedIndex].Manaregenrate}");
+            //listBox2.Items.Clear();
+            //listBox2.Items.Add($"Skills");
+            //listBox2.Items.Add($"Name|Damage|Manacost|Acccuracy|Heal");
+            //foreach (var item in stats.EntitySkills())
+            //{
+            //    if (item.SkillEntity == stats.Entity()[comboBox1.SelectedIndex].Name)
+            //    {
+            //        listBox2.Items.Add($"{item.SkillName} | {item.SkillDamage} | {item.SkillCost} | {item.SkillAccuracy} | {item.SkillHeal}");
+            //    }
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            panel1.Visible = false;
-            panel1.Enabled = false;
-            button1.Visible = false;
-            button1.Enabled = false;
-            comboBox1.Visible = false;
-            comboBox1.Enabled = false;
-            Setup();
+            //panel1.Visible = false;
+            //panel1.Enabled = false;
+            //button1.Visible = false;
+            //button1.Enabled = false;
+            //comboBox1.Visible = false;
+            //comboBox1.Enabled = false;
+            //Setup();
         }
     }
 }

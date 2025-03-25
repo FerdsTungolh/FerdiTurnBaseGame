@@ -79,6 +79,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(909, 597);
             panel1.TabIndex = 4;
+            panel1.Visible = false;
             // 
             // listBox2
             // 

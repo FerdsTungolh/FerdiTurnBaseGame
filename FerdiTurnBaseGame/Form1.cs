@@ -14,6 +14,7 @@ namespace FerdiTurnBaseGame
         private string typeofskill;
         public int PreviousMp;
         public int DamageTaken;
+        int p2;
 
         public Form1()
         {
@@ -24,9 +25,17 @@ namespace FerdiTurnBaseGame
 
         private void InitializeGame()
         {
-            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
-            Player_and_Enemies_Stats FirstPlayer = stats.Entity()[stats.Selectedplayer];
-            Player_and_Enemies_Stats SecondPlayer = stats.Entity()[1];
+            Stats stats = new Stats();
+            if (SelecyPoly.selected.GetPlayer()[0].choosedplayer == 0) 
+            { 
+               p2 = 1;
+            }
+            else
+            {
+                p2 = 0;
+            }
+            Stats FirstPlayer = stats.Entity()[SelecyPoly.selected.GetPlayer()[0].choosedplayer];
+            Stats SecondPlayer = stats.Entity()[p2];
             
             
             pictureBox1.Image = Image.FromFile(FirstPlayer.PlayerImageRight);
@@ -37,7 +46,7 @@ namespace FerdiTurnBaseGame
 
             for (int sk = 0; sk < stats.EntitySkills().Count; sk++)
             {
-                Player_and_Enemies_Stats PlayerSkills = stats.EntitySkills()[sk];
+                Stats PlayerSkills = stats.EntitySkills()[sk];
                 if (PlayerSkills.SkillEntity == FirstPlayer.Name)
                 {
                     Player1.Addskill(new Skill(PlayerSkills.SkillName, PlayerSkills.SkillDamage, PlayerSkills.SkillAccuracy, PlayerSkills.SkillCost, PlayerSkills.SkillHeal, PlayerSkills.SkillType));

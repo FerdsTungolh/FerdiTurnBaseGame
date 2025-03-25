@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 
 namespace FerdiTurnBaseGame
 {
-    public partial class PlayerMenu_Selection : Form
+    public partial class Menu: Form
     {
         public int choosedplayer = 1;
-        public PlayerMenu_Selection()
+        public string opponentname;
+        public Menu()
         {
             InitializeComponent();
             playerload();
@@ -22,26 +22,27 @@ namespace FerdiTurnBaseGame
         public void playerload()
         {
             
-           
+            string[] playernames = { "Naruto", "Sasuke" };
+            comboBox1.Items.AddRange(playernames);
+            
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Player_and_Enemies_Stats player = new Player_and_Enemies_Stats();
-            player.Selectedplayer = comboBox1.SelectedIndex;
-            //PlayerMenu_Selection.ActiveForm.Hide();
-            PlayerMenu_Selection.ActiveForm.Enabled = false;
+            
+            Stats player = new Stats();
+            SelecyPoly.selected.AddPlayer(new Selected(textBox1.Text, comboBox1.SelectedIndex));
+            player.EditName(comboBox1.SelectedIndex);
+            Menu.ActiveForm.Enabled = false;
             Map map = new Map();
             map.Show();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Player_and_Enemies_Stats player = new Player_and_Enemies_Stats();
-            player.Selectedplayer = 1;
             listBox1.Items.Clear();
-            Player_and_Enemies_Stats stats = new Player_and_Enemies_Stats();
+            Stats stats = new Stats();
             pictureBox1.Image = Image.FromFile($"{stats.Entity()[comboBox1.SelectedIndex].PlayerImageRight}");
-            listBox1.Items.Add($"Name : {stats.Entity()[comboBox1.SelectedIndex].Name}");
+            listBox1.Items.Add($"Name : {comboBox1.SelectedIndex.ToString()}");
             listBox1.Items.Add($"HP : {stats.Entity()[comboBox1.SelectedIndex].Hp}");
             listBox1.Items.Add($"Defense : {stats.Entity()[comboBox1.SelectedIndex].Defense}");
             listBox1.Items.Add($"Crit Chance : {stats.Entity()[comboBox1.SelectedIndex].Crit}");

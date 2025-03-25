@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FerdiTurnBaseGame
 {
-    public class Player_Skills_Stats
+    public class Skills_Stats
     {
         public string SkillName { get; set; }
         public int SkillDamage { get; set; }
