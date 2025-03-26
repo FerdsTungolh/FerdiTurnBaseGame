@@ -51,11 +51,10 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.Location = new Point(87, 305);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(80, 73);
+            pictureBox1.Size = new Size(73, 102);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -72,25 +71,22 @@
             // 
             // progressBar1
             // 
-            progressBar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar1.Location = new Point(204, 302);
             progressBar1.Margin = new Padding(3, 2, 3, 2);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(131, 25);
+            progressBar1.Size = new Size(131, 23);
             progressBar1.TabIndex = 3;
             // 
             // progressBar2
             // 
-            progressBar2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar2.Location = new Point(502, 78);
             progressBar2.Margin = new Padding(3, 2, 3, 2);
             progressBar2.Name = "progressBar2";
-            progressBar2.Size = new Size(109, 22);
+            progressBar2.Size = new Size(89, 20);
             progressBar2.TabIndex = 4;
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(221, 284);
@@ -102,7 +98,6 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(507, 61);
@@ -114,7 +109,6 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Location = new Point(335, 193);
             label3.Name = "label3";
@@ -128,13 +122,12 @@
             pictureBox2.Location = new Point(632, 51);
             pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(99, 88);
+            pictureBox2.Size = new Size(75, 110);
             pictureBox2.TabIndex = 8;
             pictureBox2.TabStop = false;
             // 
             // label4
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.ForeColor = Color.Red;
             label4.Location = new Point(335, 200);
@@ -156,38 +149,34 @@
             // 
             // progressBar3
             // 
-            progressBar3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar3.BackColor = SystemColors.ActiveCaption;
             progressBar3.ForeColor = SystemColors.ActiveCaption;
             progressBar3.Location = new Point(204, 342);
             progressBar3.Margin = new Padding(3, 2, 3, 2);
             progressBar3.Name = "progressBar3";
-            progressBar3.Size = new Size(131, 8);
+            progressBar3.Size = new Size(111, 11);
             progressBar3.TabIndex = 13;
             // 
             // progressBar4
             // 
-            progressBar4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar4.Location = new Point(502, 115);
             progressBar4.Margin = new Padding(3, 2, 3, 2);
             progressBar4.Name = "progressBar4";
-            progressBar4.Size = new Size(109, 8);
+            progressBar4.Size = new Size(89, 11);
             progressBar4.TabIndex = 14;
             // 
             // comboBox1
             // 
-            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(204, 355);
             comboBox1.Margin = new Padding(3, 2, 3, 2);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(132, 23);
+            comboBox1.Size = new Size(112, 23);
             comboBox1.TabIndex = 15;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // chp1
             // 
-            chp1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             chp1.AutoSize = true;
             chp1.BackColor = Color.Transparent;
             chp1.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -199,7 +188,6 @@
             // 
             // chp2
             // 
-            chp2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             chp2.AutoSize = true;
             chp2.BackColor = Color.Transparent;
             chp2.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -221,7 +209,6 @@
             // 
             // listBox1
             // 
-            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listBox1.BackColor = Color.White;
             listBox1.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBox1.ForeColor = Color.Black;
@@ -230,7 +217,7 @@
             listBox1.Location = new Point(433, 303);
             listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(298, 64);
+            listBox1.Size = new Size(278, 64);
             listBox1.TabIndex = 20;
             // 
             // Form1
@@ -238,7 +225,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(806, 469);
+            ClientSize = new Size(786, 465);
             Controls.Add(listBox1);
             Controls.Add(button2);
             Controls.Add(chp2);

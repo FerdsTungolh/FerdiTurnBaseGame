@@ -106,7 +106,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(148, 23);
             comboBox1.TabIndex = 2;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+
             // 
             // pictureBox3
             // 
@@ -115,7 +115,7 @@
             pictureBox3.Size = new Size(126, 133);
             pictureBox3.TabIndex = 1;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
+
             // 
             // button1
             // 
@@ -125,7 +125,7 @@
             button1.TabIndex = 0;
             button1.Text = "Ok";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+
             // 
             // Map
             // 
@@ -140,7 +140,7 @@
             Name = "Map";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Map";
-            Load += Map_Load;
+
             KeyDown += Map_KeyDown_1;
             KeyUp += Map_KeyUp;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

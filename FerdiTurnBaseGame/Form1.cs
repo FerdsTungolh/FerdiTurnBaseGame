@@ -26,7 +26,7 @@ namespace FerdiTurnBaseGame
         private void InitializeGame()
         {
             Stats stats = new Stats();
-            if (SelecyPoly.selected.GetPlayer()[0].choosedplayer == 0) 
+            if (SelectPoly.selected.GetPlayer()[0].choosedplayer == 0) 
             { 
                p2 = 1;
             }
@@ -34,14 +34,14 @@ namespace FerdiTurnBaseGame
             {
                 p2 = 0;
             }
-            Stats FirstPlayer = stats.Entity()[SelecyPoly.selected.GetPlayer()[0].choosedplayer];
+            Stats FirstPlayer = stats.Entity()[SelectPoly.selected.GetPlayer()[0].choosedplayer];
             Stats SecondPlayer = stats.Entity()[p2];
             
             
             pictureBox1.Image = Image.FromFile(FirstPlayer.PlayerImageRight);
             pictureBox2.Image = Image.FromFile(SecondPlayer.PlayerImageLeft);
 
-            Player1 = new Player(FirstPlayer.Name, FirstPlayer.Hp, FirstPlayer.Defense, FirstPlayer.Crit, FirstPlayer.Mana, FirstPlayer.Manaregenrate);
+            Player1 = new Player(SelectPoly.selected.GetPlayer()[0].Name, FirstPlayer.Hp, FirstPlayer.Defense, FirstPlayer.Crit, FirstPlayer.Mana, FirstPlayer.Manaregenrate);
             Player2 = new Player(SecondPlayer.Name, SecondPlayer.Hp, SecondPlayer.Defense, SecondPlayer.Crit, SecondPlayer.Mana, SecondPlayer.Manaregenrate);
 
             for (int sk = 0; sk < stats.EntitySkills().Count; sk++)
@@ -136,8 +136,6 @@ namespace FerdiTurnBaseGame
             // UI for health update
             UpdateUI();
             // Indicators of skills which skill hit and player damage
-
-            //Attack Miss & Healed indicator
 
             if (typeofskill == "Heal")
             {

@@ -40,7 +40,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(179, 391);
+            button1.Location = new Point(180, 391);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
@@ -59,25 +59,29 @@
             // 
             // listBox1
             // 
+            listBox1.BorderStyle = BorderStyle.None;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(313, 331);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 94);
+            listBox1.Size = new Size(120, 90);
             listBox1.TabIndex = 2;
             // 
             // listBox2
             // 
+            listBox2.BorderStyle = BorderStyle.None;
             listBox2.FormattingEnabled = true;
             listBox2.ItemHeight = 15;
-            listBox2.Location = new Point(456, 331);
+            listBox2.Location = new Point(439, 331);
             listBox2.Name = "listBox2";
-            listBox2.Size = new Size(235, 214);
+            listBox2.Size = new Size(252, 210);
             listBox2.TabIndex = 3;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(284, 110);
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(271, 121);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(162, 161);
             pictureBox1.TabIndex = 4;
@@ -85,15 +89,16 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(154, 493);
+            textBox1.Location = new Point(158, 493);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
+            textBox1.Size = new Size(121, 23);
             textBox1.TabIndex = 5;
+            textBox1.TextAlign = HorizontalAlignment.Center;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(167, 475);
+            label1.Location = new Point(180, 475);
             label1.Name = "label1";
             label1.Size = new Size(74, 15);
             label1.TabIndex = 6;
@@ -103,6 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(703, 563);
             Controls.Add(label1);
             Controls.Add(textBox1);

@@ -81,7 +81,7 @@ namespace FerdiTurnBaseGame
                 {
                     if (item.Name == "Naruto")
                     {
-                        item.Name = SelecyPoly.selected.GetPlayer()[0].Name;
+                        item.Name = SelectPoly.selected.GetPlayer()[0].Name;
                     }
                 }
             }
@@ -91,7 +91,7 @@ namespace FerdiTurnBaseGame
                 {
                     if (item.Name == "Sasuke")
                     {
-                        item.Name = SelecyPoly.selected.GetPlayer()[0].Name;
+                        item.Name = SelectPoly.selected.GetPlayer()[0].Name;
                     }
                 }
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FerdiTurnBaseGame
 {
-    public class SelecyPoly
+    public class SelectPoly
     {
         public static Selector selected = new Selected();
     }
